@@ -1,44 +1,37 @@
-/* ---------- Fullscreen Map + Dark Overlay Scrollytelling ---------- */
+/* ---------- FULLSCREEN MAP + DARK OVERLAY + BUTTONS ---------- */
 :root{
-  --accent:#f43f5e; /* rosa rojizo */
-  --bg-dark: rgba(15,23,42,.82); /* slate-900 con transparencia */
-  --text:#f3f4f6; /* gray-100 */
-  --muted:#cbd5e1; /* slate-300 */
+  --accent:#f43f5e;
+  --bg-dark: rgba(10,15,30,.85);
+  --text:#f3f4f6;
+  --muted:#94a3b8;
   --border: rgba(255,255,255,.12);
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:var(--text);background:#0b1020;overflow-x:hidden}
+html,body{height:100%;margin:0;background:#0f172a;color:var(--text);font-family:system-ui}
+#map{position:fixed;inset:0;z-index:1}
 
-/* Map takes full screen */
-#map{position:fixed;inset:0}
+.overlay{position:fixed;top:0;right:0;width:34vw;max-width:680px;height:100vh;overflow-y:auto;background:var(--bg-dark);border-left:1px solid var(--border);backdrop-filter:blur(4px);z-index:999}
+.brand{padding:20px;border-bottom:1px solid var(--border)}
+.brand h1{margin:0;font-size:1.3rem}
+.brand p{margin:4px 0 0;color:var(--muted)}
 
-/* Overlay scrollytelling panel */
-.overlay{position:fixed;top:0;right:0;width:36vw;max-width:680px;height:100vh;overflow-y:auto;border-left:1px solid var(--border);backdrop-filter:saturate(120%) blur(4px);z-index:1000}
-.overlay-dark{background:var(--bg-dark)}
+.nav-buttons{display:flex;gap:10px;padding:12px 20px;border-bottom:1px solid var(--border)}
+.nav-buttons button{flex:1;padding:10px;border:none;background:#1e293b;color:var(--text);cursor:pointer;border-radius:6px;font-size:1rem}
+.nav-buttons button:hover{background:#334155}
 
-.brand{position:sticky;top:0;background:transparent;padding:18px 22px 12px;border-bottom:1px solid var(--border)}
-.brand h1{margin:0 0 6px;font-size:1.2rem}
-.brand p{margin:0;color:var(--muted);font-size:.95rem}
-
-.steps{padding:8px 0}
-.step{padding:22px 20px;border-bottom:1px solid var(--border);min-height:60vh;display:flex;flex-direction:column;gap:10px}
-.step h2{margin:0;font-size:1.05rem}
-.step .meta{font-size:.9rem;color:var(--muted)}
-.step img{width:100%;height:auto;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.35);object-fit:cover}
+.steps{padding:10px 0}
+.step{padding:20px;border-bottom:1px solid var(--border);min-height:60vh}
+.step.active{background:rgba(244,63,94,.08);outline:2px solid var(--accent)}
+.step h2{margin:0 0 10px;font-size:1.1rem}
+.step .meta{color:var(--muted);margin-bottom:8px;font-size:.9rem}
+.step img{width:100%;margin:12px 0;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.4)}
 .step p{line-height:1.45}
-.step.active{outline:2px solid var(--accent);outline-offset:-2px;background:rgba(244,63,94,.08)}
 
-.footnote{padding:10px 20px;color:var(--muted);font-size:.85rem}
+.footnote{padding:12px 20px;color:var(--muted);font-size:.85rem}
 
-/* Legend (optional) */
-.legend{position:fixed;left:14px;bottom:14px;background:rgba(255,255,255,.9);color:#111827;border-radius:8px;border:1px solid rgba(0,0,0,.08);padding:8px 10px;z-index:900;font-size:12px;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+/* Legend */
+.legend{position:fixed;left:14px;bottom:14px;background:rgba(10,10,10,.8);color:#fff;padding:10px;border-radius:8px;z-index:900;font-size:12px}
 .legend .row{display:flex;align-items:center;gap:8px;margin:4px 0}
 .legend .sw{width:14px;height:14px;border-radius:4px;display:inline-block}
 
-/* Mobile tweaks */
-@media (max-width: 900px){
-  .overlay{width:100vw;max-width:none}
-  .step{min-height:66vh}
-}
+@media(max-width:900px){.overlay{width:100vw}.step{min-height:65vh}}
