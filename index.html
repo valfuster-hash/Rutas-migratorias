@@ -3,141 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StoryMap – Rutas Migratorias hacia España</title>
+  <title>StoryMap – Rutas Migratorias hacia España (Fullscreen)</title>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
+  <!-- Styles for the scrollytelling layout (dark overlay) -->
+  <link rel="stylesheet" href="scroll.css" />
+</head>
+<body>
+
+  <!-- Fullscreen map -->
+  <div id="map"></div>
+
+  <!-- Overlay scrollytelling (dark) -->
+  <aside id="overlay" class="overlay overlay-dark">
+    <header class="brand">
+      <h1>Rutas migratorias hacia España</h1>
+      <p>Desplázate para avanzar por los capítulos. El mapa se actualizará automáticamente.</p>
+    </header>
+    <div id="steps" class="steps"></div>
+    <footer class="footnote">Fuentes en cada capítulo cuando están disponibles.</footer>
+  </aside>
+
+  <!-- Polyfill (for older browsers) -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
+
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <style>
-    :root {
-      --panel-w: 40vw;
-      --accent: #d10000;
-      --bg: #fafafa;
-      --text: #1f2937;
-      --muted: #6b7280;
-    }
+  <!-- Scrollama (scrollytelling helper) -->
+  <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
 
-    html, body { height: 100%; }
-    body { margin: 0; font-family: system-ui; background: var(--bg); color: var(--text); }
+  <!-- Config (GeoJSON + chapters) -->
+  <script src="config.js"></script>
 
-    #map {
-      position: fixed;
-      top: 0; bottom: 0; right: 0;
-      left: var(--panel-w);
-    }
-
-    #story {
-      position: fixed;
-      top: 0; bottom: 0;
-      left: 0; width: var(--panel-w);
-      overflow-y: auto;
-      background: #fff;
-      border-right: 1px solid #ddd;
-    }
-
-    .story-inner { padding: 24px; }
-    .header { position: sticky; top: 0; background: #fff; padding-bottom: 10px; }
-    .chapter { padding: 30px 0; border-bottom: 1px solid #eee; min-height: 90vh; }
-    .chapter.active { background: #fff7f7; }
-    .chapter img { width: 100%; border-radius: 8px; margin: 10px 0; }
-
-    @media (max-width: 900px) {
-      :root { --panel-w: 100vw; }
-      #map { position: relative; height: 50vh; left: 0; }
-    }
-  </style>
-</head>
-
-<body>
-
-<div id="story">
-  <div class="story-inner">
-    <div class="header">
-      <h1>Rutas migratorias hacia España</h1>
-      <p>Desplázate para explorar las rutas.</p>
-    </div>
-    <div id="chapters"></div>
-  </div>
-</div>
-
-<div id="map"></div>
-
-<!-- Cargar config.js correctamente -->
-<script src="config.js"></script>
-
-<script>
-  const map = L.map('map', {
-    center: [27, -15],
-    zoom: 4
-  });
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-  const colorByRisk = r => r.includes("Extrema") ? "#8b0000" :
-                        r.includes("Muy alta")   ? "#e34a33" :
-                        "#fdbb84";
-
-  const baseRoutes = L.geoJSON(RUTAS_GEOJSON, {
-    style: f => ({
-      color: colorByRisk(f.properties.peligrosidad),
-      weight: 3,
-      opacity: 0.4
-    })
-  }).addTo(map);
-
-  let highlightLayer = L.geoJSON(null, {
-    style: { color: '#d10000', weight: 6 }
-  }).addTo(map);
-
-  function getFeature(codigo) {
-    return RUTAS_GEOJSON.features.find(f => f.properties.codigo === codigo);
-  }
-
-  function activateChapter(ch) {
-    const feat = getFeature(ch.codigo);
-    highlightLayer.clearLayers();
-    highlightLayer.addData(feat);
-    map.flyToBounds(L.geoJSON(feat).getBounds(), { duration: 1.3 });
-  }
-
-  const container = document.getElementById("chapters");
-
-  config.chapters.forEach((ch, i) => {
-    const section = document.createElement("div");
-    section.className = "chapter";
-    section.id = "chapter-" + i;
-
-    section.innerHTML = `
-      <h2>${ch.title}</h2>
-      <img src="${ch.image.src}" alt="${ch.image.alt}">
-      <p>${ch.text}</p>
-    `;
-
-    container.appendChild(section);
-  });
-
-  const chapters = Array.from(document.querySelectorAll(".chapter"));
-  let active = 0;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.55) {
-        const i = chapters.indexOf(entry.target);
-        chapters[active].classList.remove("active");
-        entry.target.classList.add("active");
-        active = i;
-        activateChapter(config.chapters[i]);
-      }
-    });
-  }, { threshold: [0.55] });
-
-  chapters.forEach(ch => observer.observe(ch));
-  chapters[0].classList.add("active");
-  activateChapter(config.chapters[0]);
-</script>
-
+  <!-- Story logic -->
+  <script src="story.js"></script>
 </body>
 </html>
