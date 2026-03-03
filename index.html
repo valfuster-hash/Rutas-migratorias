@@ -1,27 +1,23 @@
-<!DOCTYPE html>
+
+!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rutas migratorias hacia España</title>
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-o9N1j6kG8G7b3p7Z9E2JrZ9x6d1bY2u1x4f3g1u5rJU="
-    crossorigin=""
-  />
+  <!-- Leaflet CSS (sin integrity para evitar bloqueos por SRI) -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <!-- Estilos del scrollytelling -->
   <link rel="stylesheet" href="scroll.css" />
 
-  <!-- Preferencias (opcional) -->
   <meta name="color-scheme" content="dark light" />
 </head>
 
 <body>
-  <!-- Mapa -->
+  <!-- Contenedor del mapa -->
   <div id="map"></div>
 
   <!-- Overlay narrativo -->
@@ -41,39 +37,25 @@
     <footer class="footnote">Fuentes disponibles por capítulo.</footer>
   </aside>
 
-  <!-- ========= SCRIPTS (orden y defer) ========= -->
+  <!-- ================== SCRIPTS (orden + defer) ================== -->
 
   <!-- Leaflet -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-    defer
-  ></script>
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <!-- PolylineDecorator (flechas) -->
-  <script
-    src="https://unpkg.com/leaflet.polylinedecorator/dist/leaflet.polylineDecorator.min.js"
-    defer
-  ></script>
+  <script defer src="https://unpkg.com/leaflet.polylinedecorator/dist/leaflet.polylineDecorator.min.js"></script>
 
   <!-- Snake animation -->
-  <script
-    src="https://unpkg.com/leaflet-polyline-snake-anim/L.Polyline.SnakeAnim.js"
-    defer
-  ></script>
+  <script defer src="https://unpkg.com/leaflet-polyline-snake-anim/L.Polyline.SnakeAnim.js"></script>
 
   <!-- Scrollama -->
-  <script
-    src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"
-    defer
-  ></script>
+  <script defer src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
 
   <!-- Tu configuración (GeoJSON + capítulos) -->
-  <script src="config.js" defer></script>
+  <script defer src="config.js"></script>
 
   <!-- Lógica del StoryMap (usa config.js) -->
-  <script src="story.js" defer></script>
+  <script defer src="story.js"></script>
 
   <noscript>
     <p style="position:fixed;top:0;left:0;width:100%;padding:12px;background:#111;color:#fff;z-index:10000;">
@@ -82,4 +64,3 @@
   </noscript>
 </body>
 </html>
-``
