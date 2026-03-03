@@ -1,19 +1,13 @@
-// ---------- STORYMAP FULLSCREEN with DRAW LINE (snake) + FLECHAS + PUNTOS + BOTONERA ----------
+// ---------- STORYMAP FULLSCREEN with FLECHAS + OPACITY + BOTONERA ----------
 (function(){
-  // ---------- MAP BASELAYERS: Physical (default) + Dark
+  // ---------- MAP DARK BASEMAP
   const map = L.map('map', { center:[27,-15], zoom:4, zoomControl:true });
 
-  const physical = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles © Esri — Source: Esri, USGS, NOAA, Natural Earth'
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution:'© OpenStreetMap · CARTO'
   }).addTo(map);
 
-  const dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap · © CARTO'
-  });
-
-  L.control.layers({ 'Físico (Esri)': physical, 'Oscuro (CARTO)': dark }, null, { position:'topleft' }).addTo(map);
-
-  // ---------- BASE ROUTES with ANIMATED OPACITY (0.3s)
+  // ---------- BASE ROUTES with ANIMATED OPACITY
   let baseOpacity = 0.35;
 
   const colorByRisk = val => {
@@ -29,98 +23,55 @@
     style: f => ({ color: colorByRisk(f.properties.peligrosidad), weight:3, opacity:baseOpacity })
   }).addTo(map);
 
-  function animateFadeBase(to, duration=300){
-    const from = baseOpacity; const start = performance.now();
-    function frame(now){
-      const t = Math.min(1, (now - start)/duration);
-      const val = from + (to - from)*t;
-      baseRoutes.setStyle({ opacity: val });
-      if (t < 1) requestAnimationFrame(frame); else baseOpacity = to;
-    }
-    requestAnimationFrame(frame);
+  function fadeBase(to){
+    baseRoutes.setStyle({ opacity:to });
   }
 
-  // ---------- HIGHLIGHT + FLECHAS + SNAKE + PUNTOS
+  // ---------- HIGHLIGHT LAYER + FLECHAS
   const highlightLayer = L.geoJSON(null, { style:{ color:'#f43f5e', weight:6, opacity:0.95 } }).addTo(map);
   let arrowLayer = null;
-  let snakeLine = null;
-  let pointsLayer = L.layerGroup().addTo(map);
 
-  function lngLatToLatLngs(coords){ return coords.map(([lng,lat]) => [lat,lng]); }
-
-  function setArrowsOnLatLngs(latlngs){
-    if (arrowLayer) { map.removeLayer(arrowLayer); arrowLayer = null; }
-    const poly = L.polyline(latlngs);
-    arrowLayer = L.polylineDecorator(poly, {
+  function setArrowsOnFeature(feature){
+    if(arrowLayer) map.removeLayer(arrowLayer);
+    arrowLayer = L.polylineDecorator(L.geoJSON(feature).getLayers()[0],{
       patterns:[{
-        offset:'5%', repeat:'10%',
-        symbol: L.Symbol.arrowHead({ pixelSize:10, polygon:false, pathOptions:{ color:'#f43f5e', weight:2 } })
+        offset:'5%',
+        repeat:'10%',
+        symbol:L.Symbol.arrowHead({ pixelSize:10, polygon:false, pathOptions:{ color:'#f43f5e', weight:2 } })
       }]
     }).addTo(map);
   }
 
-  function setPointsOnLatLngs(latlngs, props){
-    pointsLayer.clearLayers();
-    latlngs.forEach((ll, idx) => {
-      const mk = L.circleMarker(ll, {
-        radius: 4, color:'#f43f5e', weight:1, fill:true, fillOpacity:0.9
-      }).bindPopup(`<strong>${props?.nombre || props?.codigo || ''}</strong><br>Punto ${idx+1}<br>${ll[0].toFixed(2)}, ${ll[1].toFixed(2)}`);
-      pointsLayer.addLayer(mk);
-    });
-  }
+  // ---------- CHAPTER HANDLING
+  function getFeatureByCodigo(codigo){ return RUTAS_GEOJSON.features.find(f => f.properties.codigo===codigo); }
 
   function activateChapter(ch){
-    const feat = RUTAS_GEOJSON.features.find(f => f.properties.codigo === ch.codigo);
+    const feat = getFeatureByCodigo(ch.codigo);
     if(!feat) return;
 
-    // Atenuar base al entrar
-    animateFadeBase(0.15, 300);
+    fadeBase(0.15);    // opacidad baja al entrar
 
-    // Preparar geometría
-    const latlngs = lngLatToLatLngs(feat.geometry.coordinates);
-
-    // Limpiar capas previas
     highlightLayer.clearLayers();
-    if (arrowLayer) { map.removeLayer(arrowLayer); arrowLayer = null; }
-    if (snakeLine) { map.removeLayer(snakeLine); snakeLine = null; }
+    highlightLayer.addData(feat);
 
-    // Dibujar línea con animación tipo "draw" (snake)
-    snakeLine = L.polyline(latlngs, { color:'#f43f5e', weight:6, opacity:0.95, snakingSpeed: 250 }).addTo(map);
-    snakeLine.once('snakeend', () => {
-      // Al terminar el trazado, fijar highlight y flechas
-      highlightLayer.clearLayers();
-      highlightLayer.addData(feat);
-      setArrowsOnLatLngs(latlngs);
-    });
-    // Iniciar animación
-    snakeLine.snakeIn();
+    setArrowsOnFeature(feat);
 
-    // Puntos interactivos en la ruta
-    setPointsOnLatLngs(latlngs, feat.properties || {});
-
-    // Enfocar
-    const b = L.latLngBounds(latlngs);
+    const b = L.geoJSON(feat).getBounds();
     map.flyToBounds(b, { padding:[50,50], duration:1.6 });
   }
 
   // ---------- BUILD STEPS
   const stepsContainer = document.getElementById('steps');
-  (config.chapters || []).forEach((ch,idx)=>{
-    const feat = RUTAS_GEOJSON.features.find(f=>f.properties.codigo===ch.codigo) || {properties:{}};
-    const p = feat.properties || {};
+
+  config.chapters.forEach((ch,idx)=>{
     const step = document.createElement('section');
     step.className='step'; step.dataset.index=idx;
 
-    const metaItems = [];
-    if (p.peligrosidad) metaItems.push(`Peligrosidad: ${p.peligrosidad}`);
-    if (typeof p.distancia_km_aprox!== 'undefined') metaItems.push(`${p.distancia_km_aprox} km aprox.`);
-    if (p.frecuencia_anual_aprox) metaItems.push(`Frecuencia: ${p.frecuencia_anual_aprox}`);
-
     step.innerHTML = `
-      <h2>${ch.title || p.nombre || ch.codigo}</h2>
-      <div class="meta">${metaItems.join(' · ')}</div>
+      <h2>${ch.title}</h2>
+      <div class="meta">${ch.codigo}</div>
       ${ ch.image && ch.image.src ? `<img src="${ch.image.src}" alt="${ch.image.alt}">` : '' }
-      <p>${ch.text || p.descripcion || ''}</p>
+      <p>${ch.text}</p>
     `;
 
     stepsContainer.appendChild(step);
@@ -136,21 +87,12 @@
     const el = resp.element;
     steps.forEach(s=>s.classList.remove('active'));
     el.classList.add('active');
+
     active = Number(el.dataset.index);
     activateChapter(config.chapters[active]);
   }
 
-  function handleStepExit(resp){
-    // Si sales del capítulo activo, restaurar opacidad base
-    const idx = Number(resp.element.dataset.index);
-    if (idx === active){ animateFadeBase(0.35, 300); }
-  }
-
-  scroller
-    .setup({ step:'.step', offset:0.66 })
-    .onStepEnter(handleStepEnter)
-    .onStepExit(handleStepExit);
-
+  scroller.setup({ step:'.step', offset:0.66 }).onStepEnter(handleStepEnter);
   window.addEventListener('resize', scroller.resize);
 
   // Activate first
@@ -161,20 +103,12 @@
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  prevBtn.onclick = () => { if(active > 0){ steps[active-1].scrollIntoView({ behavior:'smooth' }); } };
-  nextBtn.onclick = () => { if(active < steps.length-1){ steps[active+1].scrollIntoView({ behavior:'smooth' }); } };
-
-  // ---------- LEGEND
-  const legend = L.control({ position: 'bottomleft' });
-  legend.onAdd = function(){
-    const div = L.DomUtil.create('div', 'legend');
-    div.innerHTML = `
-      <div><strong>Peligrosidad (base)</strong></div>
-      <div class="row"><span class="sw" style="background:#8b0000"></span>Extrema</div>
-      <div class="row"><span class="sw" style="background:#e34a33"></span>Muy alta</div>
-      <div class="row"><span class="sw" style="background:#fdbb84"></span>Alta</div>
-    `;
-    return div;
+  prevBtn.onclick = () => {
+    if(active > 0){ steps[active-1].scrollIntoView({ behavior:'smooth' }); }
   };
-  legend.addTo(map);
+
+  nextBtn.onclick = () => {
+    if(active < steps.length-1){ steps[active+1].scrollIntoView({ behavior:'smooth' }); }
+  };
+
 })();
