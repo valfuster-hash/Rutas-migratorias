@@ -169,3 +169,35 @@ html, body{
     min-height:65vh;
   }
 }
+
+.img-container {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.img-container img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+  object-fit: cover;
+}
+
+/* Imagen a la derecha */
+.img-right img {
+  float: right;
+  width: 55%;
+  margin-left: 15px;
+}
+
+/* Imagen a la izquierda */
+.img-left img {
+  float: left;
+  width: 55%;
+  margin-right: 15px;
+}
+
+/* Para que el párrafo no se meta debajo de la imagen */
+.step p {
+  clear: both;
+  padding-top: 10px;
+}
