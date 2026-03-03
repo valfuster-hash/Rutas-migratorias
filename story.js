@@ -161,21 +161,19 @@
     const step = document.createElement('section');
     step.className = 'step';
     step.dataset.index = idx;
-
     
-   const sideClass = (idx % 2 === 0) ? 'img-right' : 'img-left';
+    const sideClass = (idx % 2 === 0) ? 'img-right' : 'img-left';
 
-   step.innerHTML = `
-    <h2>${ch.title}</h2>
-    <div class="meta">${metaItems.join(' · ')}</div>
+    step.innerHTML = `
+      <h2>${ch.title}</h2>
+      <div class="meta">${metaItems.join(' · ')}</div>
 
-    <div class="img-container ${sideClass}">
-      <img src="${ch.image.src}" alt="${ch.image.alt}" />
-    </div>
+      <div class="img-container ${sideClass}">
+        <img src="${ch.image.src}" alt="${ch.image.alt}" />
+      </div>
 
-    <p>${ch.text}</p>
-`;
-
+      <p>${ch.text}</p>
+`   ;
 
     stepsContainer.appendChild(step);
   });
