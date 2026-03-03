@@ -1,37 +1,56 @@
 /* ---------- FULLSCREEN MAP + DARK OVERLAY + BUTTONS ---------- */
 :root{
-  --accent:#f43f5e;
-  --bg-dark: rgba(10,15,30,.85);
-  --text:#f3f4f6;
-  --muted:#94a3b8;
+  --accent:#f43f5e; /* rosa rojizo */
+  --bg-dark: rgba(10,15,30,.85); /* overlay oscuro */
+  --text:#f3f4f6; /* texto principal */
+  --muted:#94a3b8; /* texto suavizado */
   --border: rgba(255,255,255,.12);
 }
 
-html,body{height:100%;margin:0;background:#0f172a;color:var(--text);font-family:system-ui}
-#map{position:fixed;inset:0;z-index:1}
+html, body{
+  height:100%;
+  margin:0;
+  background:#0f172a;
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+}
 
-.overlay{position:fixed;top:0;right:0;width:34vw;max-width:680px;height:100vh;overflow-y:auto;background:var(--bg-dark);border-left:1px solid var(--border);backdrop-filter:blur(4px);z-index:999}
-.brand{padding:20px;border-bottom:1px solid var(--border)}
-.brand h1{margin:0;font-size:1.3rem}
-.brand p{margin:4px 0 0;color:var(--muted)}
+/* MAPA FULLSCREEN */
+#map{
+  position:fixed;
+  inset:0;
+  z-index:1;
+}
 
-.nav-buttons{display:flex;gap:10px;padding:12px 20px;border-bottom:1px solid var(--border)}
-.nav-buttons button{flex:1;padding:10px;border:none;background:#1e293b;color:var(--text);cursor:pointer;border-radius:6px;font-size:1rem}
-.nav-buttons button:hover{background:#334155}
+/* PANEL OVERLAY DERECHO */
+.overlay{
+  position:fixed;
+  top:0;
+  right:0;
+  width:34vw;
+  max-width:680px;
+  height:100vh;
+  overflow-y:auto;
+  background:var(--bg-dark);
+  border-left:1px solid var(--border);
+  backdrop-filter:blur(4px);
+  z-index:999;
+}
 
-.steps{padding:10px 0}
-.step{padding:20px;border-bottom:1px solid var(--border);min-height:60vh}
-.step.active{background:rgba(244,63,94,.08);outline:2px solid var(--accent)}
-.step h2{margin:0 0 10px;font-size:1.1rem}
-.step .meta{color:var(--muted);margin-bottom:8px;font-size:.9rem}
-.step img{width:100%;margin:12px 0;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.4)}
-.step p{line-height:1.45}
+.overlay-dark{
+  background:var(--bg-dark);
+}
 
-.footnote{padding:12px 20px;color:var(--muted);font-size:.85rem}
+/* CABECERA DEL PANEL */
+.brand{
+  padding:20px;
+  border-bottom:1px solid var(--border);
+}
 
-/* Legend */
-.legend{position:fixed;left:14px;bottom:14px;background:rgba(10,10,10,.8);color:#fff;padding:10px;border-radius:8px;z-index:900;font-size:12px}
-.legend .row{display:flex;align-items:center;gap:8px;margin:4px 0}
-.legend .sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+.brand h1{
+  margin:0;
+  font-size:1.3rem;
+}
 
-@media(max-width:900px){.overlay{width:100vw}.step{min-height:65vh}}
+.brand p{
+  margin:4px 0 0;
