@@ -1,169 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StoryMap Interactivo | Plantilla uMap</title>
-  <link rel="icon" type="image/png" href="https://umap.openstreetmap.fr/static/img/favicon.png">
-  <style>
-    /* ----------- ESTILOS BASE ----------- */
-    :root {
-      --bg-color: #f8f8f8;
-      --text-color: #222;
-      --accent-color: #0066cc;
-      --chapter-bg: #ffffffcc;
-    }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StoryMap – Rutas Migratorias hacia España (Fullscreen)</title>
 
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    header {
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-      background: linear-gradient(135deg, var(--accent-color), #0099ff);
-      color: white;
-    }
+  <!-- PolylineDecorator CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.polylinedecorator/dist/leaflet.polylineDecorator.css" />
 
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.9;
-    }
-
-    /* ----------- CAPÍTULOS ----------- */
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .chapter {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background-color: var(--chapter-bg);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border-radius: 16px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .chapter:hover {
-      transform: scale(1.01);
-    }
-
-    .chapter img {
-      max-width: 100%;
-      border-radius: 12px;
-      margin: 1rem 0;
-    }
-
-    .chapter h2 {
-      margin-bottom: 0.5rem;
-      color: var(--accent-color);
-    }
-
-    .chapter p {
-      text-align: justify;
-      margin-bottom: 1rem;
-    }
-
-    .map-frame {
-      width: 100%;
-      height: 480px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #666;
-      border-top: 1px solid #ddd;
-      background-color: #fafafa;
-    }
-
-    footer a {
-      color: var(--accent-color);
-      text-decoration: none;
-    }
-
-    /* ----------- RESPONSIVE ----------- */
-    @media (max-width: 700px) {
-      header h1 { font-size: 1.8rem; }
-      .chapter { margin: 2rem 1rem; padding: 1.5rem; }
-      .map-frame { height: 360px; }
-    }
-  </style>
+  <!-- Styles for scrollytelling -->
+  <link rel="stylesheet" href="scroll.css" />
 </head>
+
 <body>
+  <div id="map"></div>
 
-  <header>
-    <h1>StoryMap Interactivo</h1>
-    <p>Una narrativa visual con mapas interactivos creados en uMap. Desplázate para descubrir cada capítulo.</p>
-  </header>
+  <aside id="overlay" class="overlay overlay-dark">
+    <header class="brand">
+      <h1>Rutas migratorias hacia España</h1>
+      <p>Desplázate o usa los botones para avanzar.</p>
+    </header>
 
-  <main>
+    <div class="nav-buttons">
+      <button id="prevBtn">← Anterior</button>
+      <button id="nextBtn">Siguiente →</button>
+    </div>
 
-    <!-- 🔹 CAPÍTULO 1 -->
-    <section class="chapter">
-      <h2>Capítulo 1 — Introducción</h2>
-      <img src="assets/imagen1.jpg" alt="Imagen descriptiva del capítulo 1">
-      <p>Presenta el contexto de tu historia aquí. Explica brevemente la temática, los objetivos y el enfoque geográfico del proyecto.</p>
+    <div id="steps" class="steps"></div>
 
-      <iframe class="map-frame"
-        src="https://umap.openstreetmap.fr/es/map/tu-mapa-umap_XXXXXX?scaleControl=true&miniMap=false&scrollWheelZoom=false&zoomControl=true&allowEdit=false&moreControl=true&searchControl=null&tilelayersControl=null"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
-    </section>
+    <footer class="footnote">Fuentes disponibles por capítulo.</footer>
+  </aside>
 
-    <!-- 🔹 CAPÍTULO 2 -->
-    <section class="chapter">
-      <h2>Capítulo 2 — Desarrollo</h2>
-      <img src="assets/imagen2.jpg" alt="Imagen descriptiva del capítulo 2">
-      <p>Describe aquí el desarrollo de la narrativa. Puedes acompañar el texto con una vista centrada en una parte diferente del mapa.</p>
+  <!-- Polyfills -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
 
-      <iframe class="map-frame"
-        src="https://umap.openstreetmap.fr/es/map/tu-mapa-umap_XXXXXX#12/28.6839/-17.9040"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
-    </section>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- 🔹 CAPÍTULO 3 -->
-    <section class="chapter">
-      <h2>Capítulo 3 — Conclusiones</h2>
-      <img src="assets/imagen3.jpg" alt="Imagen descriptiva del capítulo 3">
-      <p>Aquí puedes incluir un resumen, conclusiones o propuestas futuras relacionadas con el tema del mapa.</p>
+  <!-- PolylineDecorator JS -->
+  <script src="https://unpkg.com/leaflet.polylinedecorator/dist/leaflet.polylineDecorator.min.js"></script>
 
-      <iframe class="map-frame"
-        src="https://umap.openstreetmap.fr/es/map/tu-mapa-umap_XXXXXX#10/28.68/-17.90"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
-    </section>
+  <!-- Snake animation plugin -->
+  <script src="https://unpkg.com/leaflet-polyline-snake-anim/L.Polyline.SnakeAnim.js"></script>
 
-  </main>
+  <!-- Scrollama -->
+  <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
 
-  <footer>
-    <p>Creado con <a href="https://umap.openstreetmap.fr/es/" target="_blank">uMap</a> y HTML5 · Plantilla adaptable por <strong>María Ariza</strong> · © 2025</p>
-  </footer>
+  <!-- Config -->
+  <script src="config.js"></script>
+
+  <!-- Story Logic -->
+  <script src="story.js"></script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StoryMap – Rutas Migratorias hacia España (Fullscreen)</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- PolylineDecorator CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.polylinedecorator/dist/leaflet.polylineDecorator.css" />
+
+  <!-- Styles for scrollytelling -->
+  <link rel="stylesheet" href="scroll.css" />
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <aside id="overlay" class="overlay overlay-dark">
+    <header class="brand">
+      <h1>Rutas migratorias hacia España</h1>
+      <p>Desplázate o usa los botones para avanzar.</p>
+    </header>
+
+    <div class="nav-buttons">
+      <button id="prevBtn">← Anterior</button>
+      <button id="nextBtn">Siguiente →</button>
+    </div>
+
+    <div id="steps" class="steps"></div>
+
+    <footer class="footnote">Fuentes disponibles por capítulo.</footer>
+  </aside>
+
+  <!-- Polyfills -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- PolylineDecorator JS -->
+  <script src="https://unpkg.com/leaflet.polylinedecorator/dist/leaflet.polylineDecorator.min.js"></script>
+
+  <!-- Snake animation plugin -->
+  <script src="https://unpkg.com/leaflet-polyline-snake-anim/L.Polyline.SnakeAnim.js"></script>
+
+  <!-- Scrollama -->
+  <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+
+  <!-- Config -->
+  <script src="config.js"></script>
+
+  <!-- Story Logic -->
+  <script src="story.js"></script>
 
 </body>
 </html>
