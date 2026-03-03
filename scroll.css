@@ -32,7 +32,7 @@ html, body{
   top:0;
   right:0;
   width:34vw;
-  max-width:680px;
+  max-width:730px;
   height:100vh;
   overflow-y:auto;
   background:var(--bg-dark);
@@ -61,28 +61,28 @@ html, body{
 }
 
 /* BOTONERA */
-.nav-buttons{
-  display:flex;
-  gap:10px;
-  padding:12px 20px;
-  border-bottom:1px solid var(--border);
-}
+/* .nav-buttons{ */
+/*   display:flex; */
+/*   gap:10px; */
+/*   padding:12px 20px; */
+/*   border-bottom:1px solid var(--border); */
+/* } */
 
-.nav-buttons button{
-  flex:1;
-  padding:10px;
-  border:none;
-  background:#1e293b;
-  color:var(--text);
-  cursor:pointer;
-  border-radius:6px;
-  font-size:1rem;
-  transition:background .2s;
-}
+/* .nav-buttons button{ */
+/*   flex:1; */
+/*   padding:10px; */
+/*   border:none; */
+/*   background:#1e293b; */
+/*   color:var(--text); */
+/*  cursor:pointer; */
+/*   border-radius:6px; */
+/*   font-size:1rem; */
+/*  transition:background .2s; */
+/* } */
 
-.nav-buttons button:hover{
-  background:#334155;
-}
+/*.nav-buttons button:hover{ */
+/*  background:#334155; */
+/*}
 
 /* STEPS */
 .steps{
