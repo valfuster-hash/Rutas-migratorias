@@ -124,13 +124,13 @@ html, body{
 }
 
 /* Alternancia automática */
-.step-image.left img {
-  margin-right: auto;
-}
+/*.step-image.left img { */
+/*  margin-right: auto; */
+/*} */
 
-.step-image.right img {
-  margin-left: auto;
-}
+/*.step-image.right img { */
+/* margin-left: auto; */
+/*} */
 
 /* META + TEXTO */
 .step h2{
