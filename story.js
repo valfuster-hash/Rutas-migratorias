@@ -1,5 +1,4 @@
-
-// ---------- STORYMAP FULLSCREEN with SNOW + ZOOM CINEMÁTICO + DESENFOQUE ----------
+// ---------- STORYMAP FULLSCREEN with ZOOM CINEMÁTICO + DESENFOQUE ----------
 (function(){
 
   // ---------- MAPA BASE: CARTO Positron ----------
@@ -110,11 +109,11 @@
       highlightLayer.addData(feat);
       setArrows(latlngs);
 
-      // ⭐ ZOOM CINEMÁTICO SÚPER AGRESIVO ⭐
+      // ⭐ ZOOM CINEMÁTICO SÚPER AGRESIVO ⭐ (+3)
       if(ch.location){
-        const extraZoom = ch.location.zoom + 3;     // <<< ZOOM AGRESIVO
+        const extraZoom = ch.location.zoom + 3;
         map.flyTo(ch.location.center, extraZoom, {
-          duration: 2.3                   // <<< ZOOM MÁS LARGO, MÁS DRAMÁTICO
+          duration: 2.3
         });
       }
     });
@@ -123,7 +122,7 @@
     setPoints(latlngs, feat.properties);
   }
 
-  // ---------- CREACIÓN DE STEPS (imagen + texto juntos) ----------
+  // ---------- CREAR STEPS (imagen + texto juntos) ----------
   const stepsContainer=document.getElementById('steps');
 
   config.chapters.forEach((ch,idx)=>{
@@ -136,13 +135,16 @@
     if(p.frecuencia_anual_aprox)meta.push(`Frecuencia: ${p.frecuencia_anual_aprox}`);
 
     const step=document.createElement('section');
-    step.className='step inactive';    // >>> Comienza desenfocado
+    step.className='step inactive';
     step.dataset.index=idx;
 
+    // ⭐ AQUÍ ESTÁ LA CORRECCIÓN IMPORTANTE:
     step.innerHTML=`
       <h2>${ch.title}</h2>
       <div class="meta">${meta.join(' · ')}</div>
-      ${ch.image.src}
+
+      <img src="${ch.image.src}" alt="${ch.image.alt}">
+
       <p>${ch.text}</p>
     `;
 
@@ -160,11 +162,11 @@
     .onStepEnter(resp=>{
       steps.forEach(s=>s.classList.remove('active','inactive'));
 
-      resp.element.classList.add('active');    // se enfoca
+      resp.element.classList.add('active');
       active = Number(resp.element.dataset.index);
 
       steps.forEach((el,i)=>{
-        if(i!==active) el.classList.add('inactive');  // el resto se desenfocan
+        if(i!==active) el.classList.add('inactive');
       });
 
       activateChapter(config.chapters[active]);
