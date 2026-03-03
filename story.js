@@ -6,10 +6,10 @@
 
   // Basemap principal (político + relieve + fronteras)
   const terrain = L.tileLayer(
-    'https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}.jpg',
+    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
     {
-      maxZoom: 17,
-      attribution: 'Map tiles © Stamen · Data © OpenStreetMap contributors'
+      attribution: '© OpenStreetMap, © CARTO',
+      maxZoom: 19
     }
   ).addTo(map);
 
