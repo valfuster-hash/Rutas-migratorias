@@ -158,7 +158,14 @@ const config = {
     {
       codigo: 'WAAR_1',
       title: 'Ruta Atlántica Principal (Senegal → Canarias)',
-      text: 'La ruta más activa y peligrosa hacia España, reactivada desde 2023–2024. https://www.rtve.es/noticias/20240220/busca-dorado-ruta-cayuco-senegal-canarias/15978904.shtml',
+      text: `
+          La ruta más activa y peligrosa hacia España, reactivada desde 2023–2024.
+          <br><br>
+          <a href="https://www.rtve.es/noticias/20240220/busca-dorado-ruta-cayuco-senegal-canarias/15978904.shtml"
+          target="_blank" rel="noopener noreferrer">
+          Leer noticia en RTVE
+          </a>
+      `,
       image: { src: 'images/WAAR_1_mockup_v2.jpg', alt: 'Cayucos en la costa de Senegal rumbo a Canarias' },
       location: { center: [20, -16], zoom: 5 }
     },
