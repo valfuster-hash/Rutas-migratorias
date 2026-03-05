@@ -158,12 +158,12 @@ const config = {
     {
       codigo: 'WAAR_1',
       title: 'Ruta Atlántica Principal (Senegal → Canarias)',
-      text: `
-          La ruta más activa y peligrosa hacia España, reactivada desde 2023–2024.
+      text: '
+          La ruta más activa y peligrosa hacia España, reactivada desde 2023–2024.',
           <br><br>
           <a href="https://www.rtve.es/noticias/20240220/busca-dorado-ruta-cayuco-senegal-canarias/15978904.shtml"
           target="_blank" rel="noopener noreferrer">
-          Leer noticia en RTVE
+          Lee la noticia en RTVE
           </a>
       `,
       image: { src: 'images/WAAR_1_mockup_v2.jpg', alt: 'Cayucos en la costa de Senegal rumbo a Canarias' },
@@ -172,7 +172,14 @@ const config = {
     {
       codigo: 'WAAR_2',
       title: 'Mauritania → Canarias',
-      text: 'Incluida en la Northwest African Atlantic Route según UNODC.',
+      text: '
+          Incluida en la Northwest African Atlantic Route según UNODC.',
+          <br><br>
+          <a href="https://www.rtve.es/noticias/20240212/mauritania-a-canarias-clandestinidad-enganos-connivencia/15967225.shtml"
+          target="_blank" rel="noopener noreferrer">
+          Lee la noticia en RTVE
+          </a>
+      `,      
       image: { src: 'images/WAAR_2_mockup_v2.jpg', alt: 'Tramo costero de Mauritania hacia Canarias' },
       location: { center: [23, -16], zoom: 6 }
     },
