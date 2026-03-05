@@ -13,7 +13,7 @@ const RUTAS_GEOJSON = {
         peligrosidad: "Muy alta",
         distancia_km_aprox: 1500,
         frecuencia_anual_aprox: "Alta (decenas de miles de personas)",
-        descripcion: "Ruta marítima desde Senegal hacia Canarias, identificada como la ruta más activa y peligrosa, especialmente reactivada desde 2023-2024. Se ha convertido en uno de los principales corredores migratorios hacia España. En 2024 llegaron al archipiélago 46843 personas por vía marítima, la cifra más alta registrada. Sin embargo, también es una de las rutas más peligrosas del mundo: organizaciones como Caminando Fronteras estiman que más de 10000 personas murieron en 2024 intentando alcanzar España, la mayoría en esta travesía. En 2025 las llegadas descendieron a unas 17500, aunque el riesgo sigue siendo extremadamente alto.",
+        descripcion: "Ruta marítima desde Senegal hacia Canarias, hoy uno de los principales corredores migratorios hacia España. En 2024 llegaron 46843 personas, el mayor número registrado. Pero también es una de las rutas más mortales del mundo: más de 10000 migrantes murieron ese mismo año intentando alcanzar las islas. En 2025 las llegadas bajaron a unas 17500, aunque el peligro de la travesía sigue siendo extremo frente a un océano impredecible y embarcaciones frágiles.",
         fuentes: ["EOM 2024", "IOM DTM", "UNODC"]
       },
       geometry: {
