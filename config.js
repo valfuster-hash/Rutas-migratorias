@@ -211,6 +211,12 @@ const config = {
       codigo: 'WMR_2',
       title: 'Nador → Melilla',
       text: 'Ruta mixta marítima y terrestre hacia la ciudad española.',
+          <br><br>
+          <a href="https://www.borderforensics.org/es/investigations/nadormelilla/"
+          target="_blank" rel="noopener noreferrer">
+          Lee el informe sobre la tragedia de Nador del $24$ de junio de $2022$
+          </a>
+      `,
       image: { src: 'images/WMR_2_mockup_v2.jpg', alt: 'Bahía próxima a Melilla desde Nador' },
       location: { center: [35.25, -2.9], zoom: 9 }
     },
