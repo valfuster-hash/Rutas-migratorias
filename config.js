@@ -245,6 +245,6 @@ const config = {
       `,
       image: { src: 'images/WAAR_4_mockup_v2.jpg', alt: 'Costa de Gambia con embarcaciones artesanales' },
       location: { center: [18, -17], zoom: 5 }
-    }
+    },
   ]
 };
