@@ -239,7 +239,7 @@ Lee el informe sobre la tragedia de Nador del 24 de junio de 2022
 </a>
 `,
       image: {
-        src: "images/WMR_2_mockup_v2.jpg",
+        src: "images/Nador-Melilla_v1.jpg",
         alt: "Bahía próxima a Melilla desde Nador"
       },
       location: { center: [35.25, -2.9], zoom: 9 }
