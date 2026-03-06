@@ -213,7 +213,7 @@ Lee los informes de la organización Caminando Fronteras
       codigo: "WMR_1",
       title: "Tánger → Tarifa (Estrecho de Gibraltar)",
       text: `
-Una ruta corta pero muy peligrosa.
+La ruta mediterránea occidental entre Tánger (Marruecos) y Tarifa (España) atraviesa el Estrecho de Gibraltar, uno de los pasos marítimos más transitados del mundo. Con unos 14 km de distancia en su punto más corto, es una de las rutas más breves hacia Europa, pero también muy peligrosa debido a fuertes corrientes, intenso tráfico marítimo y embarcaciones precarias. Cada año miles de personas intentan cruzarla en pateras o lanchas rápidas, registrándose rescates frecuentes y numerosas desapariciones según datos de la Organización Internacional para las Migraciones.
 <br><br>
 <a href="https://www.diarioarea.com/campo-de-gibraltar/la-inmigracion-ilegal-en-el-estrecho-de-gibraltar-aumenta-un-57-en-enero/"
 target="_blank" rel="noopener noreferrer">
