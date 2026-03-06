@@ -249,7 +249,7 @@ Lee el informe sobre la tragedia de Nador del 24 de junio de 2022
       codigo: "WMR_3",
       title: "Argel → Andalucía",
       text: `
-Ruta mediterránea con destino al sur de España.
+La ruta marítima entre Argel (Argelia) y Málaga (España) forma parte del corredor migratorio del Mediterráneo occidental. Las embarcaciones recorren entre 180 y 220 km de mar abierto, generalmente en pateras o pequeñas lanchas con escasos medios de navegación. La travesía puede durar más de 24 horas y está expuesta a cambios bruscos de viento y oleaje, lo que aumenta el riesgo para los ocupantes. Cada año cientos o miles de personas intentan este cruce, con operativos frecuentes de rescate y desapariciones en el mar registradas por la Organización Internacional para las Migraciones.
 <br><br>
 <a href="https://www.larazon.es/andalucia/inmigracion-argelia-nota-centros-menores-andalucia_2026012769784672eb223406e5b03a98.html"
 target="_blank" rel="noopener noreferrer">
@@ -267,7 +267,7 @@ Lee la noticia en La Razón
       codigo: "WAAR_4",
       title: "Gambia → Canarias",
       text: `
-Una variante extremadamente peligrosa de la ruta atlántica.
+La ruta atlántica entre Gambia y las Islas Canarias es una de las variantes más largas del corredor migratorio hacia España. Las embarcaciones recorren más de 1500 km de océano abierto, normalmente en cayucos de pesca adaptados para largas travesías. El viaje puede durar entre una y dos semanas, con alto riesgo por corrientes atlánticas, falta de combustible y escasez de agua y alimentos. Debido a su distancia extrema, se considera una de las rutas más extremadamente peligrosas hacia Europa, con numerosas muertes y desapariciones registradas cada año según la Organización Internacional para las Migraciones.
 <br><br>
 <a href="https://www.laprovincia.es/canarias/2026/01/07/jinack-nuevo-epicentro-mortal-ruta-125459243.html"
 target="_blank" rel="noopener noreferrer">
