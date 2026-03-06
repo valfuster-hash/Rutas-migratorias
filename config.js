@@ -175,7 +175,7 @@ Lee la noticia en RTVE
 
     {
       codigo: "WAAR_2",
-      title: "Mauritania → Canarias",
+      title: "Ruta Atlántica Mauritania → Canarias",
       text: `
 La ruta atlántica entre Mauritania y las Islas Canarias es una de las principales vías de migración irregular hacia Europa. Cada año miles de personas intentan cruzar el Atlántico en cayucos o embarcaciones precarias, recorriendo entre 700 y 900 km de océano abierto. La travesía puede durar hasta una semana y está expuesta a corrientes fuertes, falta de combustible y escasez de agua. Por su distancia y condiciones extremas, se considera una de las rutas migratorias más peligrosas del mundo, con cientos de muertes o desapariciones registradas anualmente según la Organización Internacional para las Migraciones.
 <br><br>
@@ -193,7 +193,7 @@ Lee la noticia en RTVE
 
     {
       codigo: "WAAR_3",
-      title: "Sahara Occidental → Canarias",
+      title: "Ruta Atlántica Sahara Occidental → Canarias",
       text: `
 La ruta desde El Aaiún en el Sáhara Occidental hacia las Islas Canarias se ha convertido en uno de los trayectos más utilizados dentro del corredor atlántico desde 2020. Las embarcaciones recorren unos 450 km de océano abierto, generalmente en lanchas neumáticas o pequeñas pateras con alta sobrecarga. Aunque la distancia es menor que otras rutas atlánticas, las corrientes, el viento y la falta de medios de navegación hacen que la travesía sea muy peligrosa. Cada año miles de migrantes intentan este cruce, con numerosos rescates y desapariciones en el mar registrados por organismos como la Organización Internacional para las Migraciones.
 <br><br>
@@ -211,7 +211,7 @@ Lee los informes de la organización Caminando Fronteras
 
     {
       codigo: "WMR_1",
-      title: "Tánger → Tarifa (Estrecho de Gibraltar)",
+      title: "Ruta Mediterránea Occidental Tánger → Tarifa (Estrecho de Gibraltar)",
       text: `
 La ruta mediterránea occidental entre Tánger (Marruecos) y Tarifa (España) atraviesa el Estrecho de Gibraltar, uno de los pasos marítimos más transitados del mundo. Con unos 14 km de distancia en su punto más corto, es una de las rutas más breves hacia Europa, pero también muy peligrosa debido a fuertes corrientes, intenso tráfico marítimo y embarcaciones precarias. Cada año miles de personas intentan cruzarla en pateras o lanchas rápidas, registrándose rescates frecuentes y numerosas desapariciones según datos de la Organización Internacional para las Migraciones.
 <br><br>
@@ -229,7 +229,7 @@ Lee la noticia del Diario Área
 
     {
       codigo: "WMR_2",
-      title: "Nador → Melilla",
+      title: "Ruta Nador → Melilla",
       text: `
 Ruta mixta marítima y terrestre. La ruta entre Nador (Marruecos) y Melilla (España) es uno de los pasos más cortos hacia territorio europeo en el norte de África. Aunque la distancia marítima es reducida, muchos migrantes intentan acceder rodeando la costa en pequeñas embarcaciones o intentando saltar el perímetro fronterizo de la ciudad. La fuerte vigilancia y los dispositivos de control convierten esta ruta en altamente peligrosa, con frecuentes intentos colectivos, rescates en el mar y enfrentamientos en la frontera, documentados por organizaciones como la Organización Internacional para las Migraciones.
 <br><br>
@@ -247,7 +247,7 @@ Lee el informe sobre la tragedia de Nador del 24 de junio de 2022
 
     {
       codigo: "WMR_3",
-      title: "Argel → Andalucía",
+      title: "Ruta Argelia → Andalucía (Argel → Málaga)",
       text: `
 La ruta marítima entre Argel (Argelia) y Málaga (España) forma parte del corredor migratorio del Mediterráneo occidental. Las embarcaciones recorren entre 180 y 220 km de mar abierto, generalmente en pateras o pequeñas lanchas con escasos medios de navegación. La travesía puede durar más de 24 horas y está expuesta a cambios bruscos de viento y oleaje, lo que aumenta el riesgo para los ocupantes. Cada año cientos o miles de personas intentan este cruce, con operativos frecuentes de rescate y desapariciones en el mar registradas por la Organización Internacional para las Migraciones.
 <br><br>
@@ -265,7 +265,7 @@ Lee la noticia en La Razón
 
     {
       codigo: "WAAR_4",
-      title: "Gambia → Canarias",
+      title: "Ruta Gambia → Canarias (variante atlántica sur)",
       text: `
 La ruta atlántica entre Gambia y las Islas Canarias es una de las variantes más largas del corredor migratorio hacia España. Las embarcaciones recorren más de 1500 km de océano abierto, normalmente en cayucos de pesca adaptados para largas travesías. El viaje puede durar entre una y dos semanas, con alto riesgo por corrientes atlánticas, falta de combustible y escasez de agua y alimentos. Debido a su distancia extrema, se considera una de las rutas más extremadamente peligrosas hacia Europa, con numerosas muertes y desapariciones registradas cada año según la Organización Internacional para las Migraciones.
 <br><br>
