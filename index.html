@@ -102,7 +102,7 @@
       //const midLat = (coords[i - 1][1] + coords[i][1]) / 2;
       //const midLng = (coords[i - 1][0] + coords[i][0]) / 2;
       //curveCoords.push('Q', [midLat, midLng], [coords[i][1], coords[i][0]]);
-      const factor = 1.5; // >1 acentúa, <1 suaviza
+      const factor = 2; // >1 acentúa, <1 suaviza
       const midLat = (coords[i - 1][1] + coords[i][1]) / 2 + (coords[i - 1][1] - coords[i][1]) / factor;
       const midLng = (coords[i - 1][0] + coords[i][0]) / 2 + (coords[i - 1][0] - coords[i][0]) / factor;
       curveCoords.push('Q', [midLat, midLng], [coords[i][1], coords[i][0]]);
