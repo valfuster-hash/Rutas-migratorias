@@ -195,7 +195,7 @@ Lee la noticia en RTVE
       codigo: "WAAR_3",
       title: "Sahara Occidental → Canarias",
       text: `
-Una de las rutas más utilizadas desde 2020.
+La ruta desde El Aaiún en el Sáhara Occidental hacia las Islas Canarias se ha convertido en uno de los trayectos más utilizados dentro del corredor atlántico desde 2020. Las embarcaciones recorren unos 450 km de océano abierto, generalmente en lanchas neumáticas o pequeñas pateras con alta sobrecarga. Aunque la distancia es menor que otras rutas atlánticas, las corrientes, el viento y la falta de medios de navegación hacen que la travesía sea muy peligrosa. Cada año miles de migrantes intentan este cruce, con numerosos rescates y desapariciones en el mar registrados por organismos como la Organización Internacional para las Migraciones.
 <br><br>
 <a href="https://caminandofronteras.org/rutas/ruta-canaria/"
 target="_blank" rel="noopener noreferrer">
